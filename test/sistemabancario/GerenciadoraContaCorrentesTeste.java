@@ -1,6 +1,7 @@
 package sistemabancario;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class GerenciadoraContaCorrentesTeste {
 		ContaCorrente contaCorrente = gerContaCorrentes.pesquisaConta(1);
 		ContaCorrente contaCorrente2 = gerContaCorrentes.pesquisaConta(4);
 
-		assertThat(contaCorrente.getId(), is(1));
-		assertThat(contaCorrente2, is(nullValue()));
+		assertThat(contaCorrente, instanceOf(ContaCorrente.class));
+		assertNull(contaCorrente2);
 	}
 	
 	@Test
@@ -56,8 +57,9 @@ public class GerenciadoraContaCorrentesTeste {
 		List <ContaCorrente> contaCorrentes = new ArrayList();
 		GerenciadoraContas gerContaCorrentes = new GerenciadoraContas(contaCorrentes);
 		gerContaCorrentes.adicionaConta(contaCorrente01);
-		int contaCorrente01Id = contaCorrente01.getId();
-		assertThat(gerContaCorrentes.pesquisaConta(contaCorrente01Id), instanceOf(ContaCorrente.class));
+
+		boolean ativo = gerContaCorrentes.contaAtiva(contaCorrente01.getId());
+		assertThat(ativo, is(true));
 	}
 
 	@Test
