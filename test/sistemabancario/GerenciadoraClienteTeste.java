@@ -41,8 +41,8 @@ public class GerenciadoraClienteTeste {
 		List <Cliente> clientes = new ArrayList();
 		GerenciadoraClientes gerClientes = new GerenciadoraClientes(clientes);
 		gerClientes.adicionaCliente(cliente01);
-		assertThat(cliente01.getId(), is(1));
-		assertThat(cliente01.getEmail(), is("clayton@gmail.com"));
+		boolean clienteAtivo = gerClientes.clienteAtivo(cliente01.getId());
+		assertThat(clienteAtivo, is(true));
 		
 	}
 
