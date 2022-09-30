@@ -12,9 +12,12 @@ public class GerenciadoraClienteTeste {
 	@Test
 	public void testePesquisaCliente() {
 		/*criando clientes para instaciar no caso de Teste*/
+
+		int idCliente01 = 1;
+		int idCliente02 = 2;
 		
-		Cliente cliente01 = new Cliente(1, "Clayton", 47, "clayton@gmail.com", 1 ,true);
-		Cliente cliente02 = new Cliente(2, "Maria", 10, "maria@gmail.com", 1 ,true);
+		Cliente cliente01 = new Cliente(idCliente01, "Clayton", 47, "clayton@gmail.com", 1 ,true);
+		Cliente cliente02 = new Cliente(idCliente02, "Maria", 10, "maria@gmail.com", 1 ,true);
 		
 		List <Cliente> clientes = new ArrayList();
 		clientes.add(cliente01);
@@ -22,13 +25,13 @@ public class GerenciadoraClienteTeste {
 		
 		GerenciadoraClientes gerClientes = new GerenciadoraClientes(clientes);
 	
-		Cliente cliente = gerClientes.pesquisaCliente(1);
+		Cliente cliente = gerClientes.pesquisaCliente(idCliente01);
 		
-		assertThat(cliente.getId(), is(1));
+		assertThat(cliente.getId(), is(idCliente01));
 		assertThat(cliente.getEmail(), is("clayton@gmail.com"));
 		
-		Cliente cliente2 = gerClientes.pesquisaCliente(2);
-		assertThat(cliente2.getId(), is(2));
+		Cliente cliente2 = gerClientes.pesquisaCliente(idCliente02);
+		assertThat(cliente2.getId(), is(idCliente02));
 		assertThat(cliente2.getEmail(), is("maria@gmail.com"));
 		
 				
@@ -53,6 +56,7 @@ public class GerenciadoraClienteTeste {
 		GerenciadoraClientes gerClientes = new GerenciadoraClientes(clientes);
 		gerClientes.adicionaCliente(cliente01);
 		assertThat(gerClientes.removeCliente(cliente01.getId()), is(true));
+		assertThat(gerClientes.getClientesDoBanco(), is(java.util.Collections.emptyList()));
 	}
 
 	@Test
